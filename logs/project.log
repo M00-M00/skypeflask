@@ -31,3 +31,4 @@ Traceback (most recent call last):
   File "c:\users\44738\documents\web\venv\lib\site-packages\werkzeug\routing.py", line 2179, in build
     raise BuildError(endpoint, values, method, self)
 werkzeug.routing.BuildError: Could not build url for endpoint 'login'. Did you mean 'auth.login' instead?
+2020-04-26 11:28:45,023 INFO: Project startup [in C:\Users\44738\Documents\Web\app\__init__.py:63]

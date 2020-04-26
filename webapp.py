@@ -1,4 +1,4 @@
-from app import create_app, db, cli
+from app import create_app, db
 from app.models import User, Transaction
 import app.stocks as stocks
 

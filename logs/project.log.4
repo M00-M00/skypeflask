@@ -1,4 +1,4 @@
-2020-04-25 16:48:55,104 ERROR: Exception on /markets [GET] [in c:\users\44738\documents\web\venv\lib\site-packages\flask\app.py:1891]
+2020-04-26 09:43:17,355 ERROR: Exception on / [GET] [in c:\users\44738\documents\web\venv\lib\site-packages\flask\app.py:1891]
 Traceback (most recent call last):
   File "c:\users\44738\documents\web\venv\lib\site-packages\flask\app.py", line 2446, in wsgi_app
     response = self.full_dispatch_request()
@@ -14,8 +14,8 @@ Traceback (most recent call last):
     return self.view_functions[rule.endpoint](**req.view_args)
   File "c:\users\44738\documents\web\venv\lib\site-packages\flask_login\utils.py", line 272, in decorated_view
     return func(*args, **kwargs)
-  File "C:\Users\44738\Documents\Web\app\main\routes.py", line 36, in markets
-    return render_template('markets.html', title = 'Markets', form = formView, users_tickers = users_tickers, live_price = stocks.live_price)
+  File "C:\Users\44738\Documents\Web\app\main\routes.py", line 31, in index
+    return render_template('index.html', title='Home', user=user)
   File "c:\users\44738\documents\web\venv\lib\site-packages\flask\templating.py", line 140, in render_template
     ctx.app,
   File "c:\users\44738\documents\web\venv\lib\site-packages\flask\templating.py", line 120, in _render
@@ -26,7 +26,7 @@ Traceback (most recent call last):
     reraise(*rewrite_traceback_stack(source=source))
   File "c:\users\44738\documents\web\venv\lib\site-packages\jinja2\_compat.py", line 28, in reraise
     raise value.with_traceback(tb)
-  File "C:\Users\44738\Documents\Web\app\templates\markets.html", line 1, in top-level template code
+  File "C:\Users\44738\Documents\Web\app\templates\index.html", line 1, in top-level template code
     {% extends "base.html" %}
   File "C:\Users\44738\Documents\Web\app\templates\base.html", line 2, in top-level template code
     {% extends 'bootstrap/base.html' %}
@@ -37,8 +37,8 @@ Traceback (most recent call last):
   File "c:\users\44738\documents\web\venv\lib\site-packages\flask_bootstrap\templates\bootstrap\base.html", line 11, in block "html"
     {%- endblock metas %}
   File "c:\users\44738\documents\web\venv\lib\site-packages\flask_bootstrap\templates\bootstrap\base.html", line 12, in block "body"
-  File "C:\Users\44738\Documents\Web\app\templates\base.html", line 23, in block "navbar"
-    <a class="navbar-brand" href="{{ url_for('index') }}">Project</a>
+  File "C:\Users\44738\Documents\Web\app\templates\base.html", line 27, in block "navbar"
+    <li><a href="{{ url_for('index') }}">Home</a></li>
   File "c:\users\44738\documents\web\venv\lib\site-packages\flask\helpers.py", line 370, in url_for
     return appctx.app.handle_url_build_error(error, endpoint, values)
   File "c:\users\44738\documents\web\venv\lib\site-packages\flask\app.py", line 2215, in handle_url_build_error
@@ -49,8 +49,8 @@ Traceback (most recent call last):
     endpoint, values, method=method, force_external=external
   File "c:\users\44738\documents\web\venv\lib\site-packages\werkzeug\routing.py", line 2179, in build
     raise BuildError(endpoint, values, method, self)
-werkzeug.routing.BuildError: Could not build url for endpoint 'index'. Did you mean 'main.markets' instead?
-2020-04-25 16:48:55,159 ERROR: Exception on /favicon.ico [GET] [in c:\users\44738\documents\web\venv\lib\site-packages\flask\app.py:1891]
+werkzeug.routing.BuildError: Could not build url for endpoint 'index'. Did you mean 'main.index' instead?
+2020-04-26 09:43:17,426 ERROR: Exception on /favicon.ico [GET] [in c:\users\44738\documents\web\venv\lib\site-packages\flask\app.py:1891]
 Traceback (most recent call last):
   File "c:\users\44738\documents\web\venv\lib\site-packages\flask\app.py", line 1949, in full_dispatch_request
     rv = self.dispatch_request()
@@ -98,8 +98,8 @@ Traceback (most recent call last):
   File "c:\users\44738\documents\web\venv\lib\site-packages\flask_bootstrap\templates\bootstrap\base.html", line 11, in block "html"
     {%- endblock metas %}
   File "c:\users\44738\documents\web\venv\lib\site-packages\flask_bootstrap\templates\bootstrap\base.html", line 12, in block "body"
-  File "C:\Users\44738\Documents\Web\app\templates\base.html", line 23, in block "navbar"
-    <a class="navbar-brand" href="{{ url_for('index') }}">Project</a>
+  File "C:\Users\44738\Documents\Web\app\templates\base.html", line 27, in block "navbar"
+    <li><a href="{{ url_for('index') }}">Home</a></li>
   File "c:\users\44738\documents\web\venv\lib\site-packages\flask\helpers.py", line 370, in url_for
     return appctx.app.handle_url_build_error(error, endpoint, values)
   File "c:\users\44738\documents\web\venv\lib\site-packages\flask\app.py", line 2215, in handle_url_build_error
@@ -110,5 +110,5 @@ Traceback (most recent call last):
     endpoint, values, method=method, force_external=external
   File "c:\users\44738\documents\web\venv\lib\site-packages\werkzeug\routing.py", line 2179, in build
     raise BuildError(endpoint, values, method, self)
-werkzeug.routing.BuildError: Could not build url for endpoint 'index'. Did you mean 'main.markets' instead?
-2020-04-26 09:35:52,096 INFO: Project startup [in C:\Users\44738\Documents\Web\app\__init__.py:57]
+werkzeug.routing.BuildError: Could not build url for endpoint 'index'. Did you mean 'main.index' instead?
+2020-04-26 09:43:53,149 INFO: Project startup [in C:\Users\44738\Documents\Web\app\__init__.py:57]

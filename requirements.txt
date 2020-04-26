@@ -37,6 +37,7 @@ pandas==1.0.3
 parse==1.15.0
 parso==0.7.0
 pluggy==0.13.1
+psycopg2==2.8.5
 pyee==7.0.1
 PyJWT==1.7.1
 pyls==0.1.6

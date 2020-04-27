@@ -83,7 +83,7 @@ class User(UserMixin, db.Model):
 
 class Transaction(db.Model):
     id = db.Column(db.Integer, primary_key= True)
-    security_id = db.Column(db.String(64), db.ForeignKey('security.id'))
+    security_id = db.Column(db.Integer, db.ForeignKey('security.id'))
     long = db.Column(db.Boolean, default= False,  nullable=True)
     unit_price = db.Column(db.Integer)
     total_cost = db.Column(db.Integer)

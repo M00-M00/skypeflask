@@ -1,5 +1,5 @@
 from app import create_app, db
-from app.models import User, Security
+from app.models import User, Security, Transaction
 import app.stocks as stocks
 
 app = create_app()

@@ -88,6 +88,7 @@ class Transaction(db.Model):
     quantity = db.Column(db.Integer)
     timestamp = db.Column(db.DateTime, index = True, default = datetime.utcnow)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+    testfield = db.Column(db.String(), index = False)
 
 
     def __repr__(self):

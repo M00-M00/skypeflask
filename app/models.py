@@ -18,8 +18,6 @@ def load_user(id):
 
 
 
-
-
 class User(UserMixin, db.Model):
     id = db.Column(db.Integer, primary_key = True)
     username = db.Column(db.String(64), index = True, unique = True)
@@ -107,9 +105,9 @@ class Security(db.Model):
     ticker = db.Column(db.String(64), index = True)
     tx_security = db.relationship("Transaction", backref='subscriber', lazy='dynamic')
     sector = db.Column(db.String(64), index = True)
-    name = db.Column(db.String(64), index = True)
+    name = db.Column(db.String(128), index = True)
     website = db.Column(db.String(64), index = True)
-    summary = db.Column(db.String(1024), index = True)
+    summary = db.Column(db.Text, index = True)
 
 
 

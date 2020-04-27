@@ -55,6 +55,3 @@ def get_figures(ticker):
 
 def live_price(ticker):
     return si.get_live_price(ticker)
-
-
-``

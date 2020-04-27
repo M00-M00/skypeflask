@@ -57,5 +57,4 @@ def live_price(ticker):
     return si.get_live_price(ticker)
 
 
-def database_link():
-    print(os.os.environ.get('DATABASE_URL'))
+``

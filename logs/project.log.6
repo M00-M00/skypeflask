@@ -1,0 +1,95 @@
+2020-12-22 23:42:23,632 ERROR: Exception on /fetch [POST] [in C:\Users\44738\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.7_qbz5n2kfra8p0\LocalCache\local-packages\Python37\site-packages\flask\app.py:1891]
+Traceback (most recent call last):
+  File "C:\Users\44738\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.7_qbz5n2kfra8p0\LocalCache\local-packages\Python37\site-packages\sqlalchemy\engine\base.py", line 1248, in _execute_context
+    cursor, statement, parameters, context
+  File "C:\Users\44738\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.7_qbz5n2kfra8p0\LocalCache\local-packages\Python37\site-packages\sqlalchemy\engine\default.py", line 588, in do_execute
+    cursor.execute(statement, parameters)
+sqlite3.OperationalError: no such column: group.user_id
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\44738\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.7_qbz5n2kfra8p0\LocalCache\local-packages\Python37\site-packages\flask\app.py", line 2446, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\44738\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.7_qbz5n2kfra8p0\LocalCache\local-packages\Python37\site-packages\flask\app.py", line 1951, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\44738\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.7_qbz5n2kfra8p0\LocalCache\local-packages\Python37\site-packages\flask_cors\extension.py", line 165, in wrapped_function
+    return cors_after_request(app.make_response(f(*args, **kwargs)))
+  File "C:\Users\44738\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.7_qbz5n2kfra8p0\LocalCache\local-packages\Python37\site-packages\flask\app.py", line 1820, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "C:\Users\44738\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.7_qbz5n2kfra8p0\LocalCache\local-packages\Python37\site-packages\flask\_compat.py", line 39, in reraise
+    raise value
+  File "C:\Users\44738\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.7_qbz5n2kfra8p0\LocalCache\local-packages\Python37\site-packages\flask\app.py", line 1949, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\44738\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.7_qbz5n2kfra8p0\LocalCache\local-packages\Python37\site-packages\flask\app.py", line 1935, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "C:\Users\44738\OneDrive\Documents\Web\app\main\routes.py", line 59, in fetch
+    db_group = group.query.filter_by(group_name = group_name).first()
+  File "C:\Users\44738\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.7_qbz5n2kfra8p0\LocalCache\local-packages\Python37\site-packages\sqlalchemy\orm\query.py", line 3298, in first
+    ret = list(self[0:1])
+  File "C:\Users\44738\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.7_qbz5n2kfra8p0\LocalCache\local-packages\Python37\site-packages\sqlalchemy\orm\query.py", line 3076, in __getitem__
+    return list(res)
+  File "C:\Users\44738\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.7_qbz5n2kfra8p0\LocalCache\local-packages\Python37\site-packages\sqlalchemy\orm\query.py", line 3403, in __iter__
+    return self._execute_and_instances(context)
+  File "C:\Users\44738\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.7_qbz5n2kfra8p0\LocalCache\local-packages\Python37\site-packages\sqlalchemy\orm\query.py", line 3428, in _execute_and_instances
+    result = conn.execute(querycontext.statement, self._params)
+  File "C:\Users\44738\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.7_qbz5n2kfra8p0\LocalCache\local-packages\Python37\site-packages\sqlalchemy\engine\base.py", line 984, in execute
+    return meth(self, multiparams, params)
+  File "C:\Users\44738\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.7_qbz5n2kfra8p0\LocalCache\local-packages\Python37\site-packages\sqlalchemy\sql\elements.py", line 293, in _execute_on_connection
+    return connection._execute_clauseelement(self, multiparams, params)
+  File "C:\Users\44738\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.7_qbz5n2kfra8p0\LocalCache\local-packages\Python37\site-packages\sqlalchemy\engine\base.py", line 1103, in _execute_clauseelement
+    distilled_params,
+  File "C:\Users\44738\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.7_qbz5n2kfra8p0\LocalCache\local-packages\Python37\site-packages\sqlalchemy\engine\base.py", line 1288, in _execute_context
+    e, statement, parameters, cursor, context
+  File "C:\Users\44738\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.7_qbz5n2kfra8p0\LocalCache\local-packages\Python37\site-packages\sqlalchemy\engine\base.py", line 1482, in _handle_dbapi_exception
+    sqlalchemy_exception, with_traceback=exc_info[2], from_=e
+  File "C:\Users\44738\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.7_qbz5n2kfra8p0\LocalCache\local-packages\Python37\site-packages\sqlalchemy\util\compat.py", line 178, in raise_
+    raise exception
+  File "C:\Users\44738\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.7_qbz5n2kfra8p0\LocalCache\local-packages\Python37\site-packages\sqlalchemy\engine\base.py", line 1248, in _execute_context
+    cursor, statement, parameters, context
+  File "C:\Users\44738\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.7_qbz5n2kfra8p0\LocalCache\local-packages\Python37\site-packages\sqlalchemy\engine\default.py", line 588, in do_execute
+    cursor.execute(statement, parameters)
+sqlalchemy.exc.OperationalError: (sqlite3.OperationalError) no such column: group.user_id
+[SQL: SELECT "group".id AS group_id, "group".group_name AS group_group_name, "group".user_id AS group_user_id 
+FROM "group" 
+WHERE "group".group_name = ?
+ LIMIT ? OFFSET ?]
+[parameters: ('test_group', 1, 0)]
+(Background on this error at: http://sqlalche.me/e/e3q8)
+2020-12-22 23:43:03,359 INFO: Project startup [in C:\Users\44738\OneDrive\Documents\Web\app\__init__.py:66]
+2020-12-22 23:43:09,083 INFO: Project startup [in C:\Users\44738\OneDrive\Documents\Web\app\__init__.py:66]
+2020-12-22 23:43:13,431 INFO: Project startup [in C:\Users\44738\OneDrive\Documents\Web\app\__init__.py:66]
+2020-12-22 23:43:17,180 INFO: Project startup [in C:\Users\44738\OneDrive\Documents\Web\app\__init__.py:66]
+2020-12-22 23:43:20,746 INFO: Project startup [in C:\Users\44738\OneDrive\Documents\Web\app\__init__.py:66]
+2020-12-22 23:43:25,426 INFO: Project startup [in C:\Users\44738\OneDrive\Documents\Web\app\__init__.py:66]
+2020-12-22 23:43:29,046 INFO: Project startup [in C:\Users\44738\OneDrive\Documents\Web\app\__init__.py:66]
+2020-12-22 23:43:35,508 INFO: Project startup [in C:\Users\44738\OneDrive\Documents\Web\app\__init__.py:66]
+2020-12-22 23:43:45,057 INFO: Project startup [in C:\Users\44738\OneDrive\Documents\Web\app\__init__.py:66]
+2020-12-22 23:43:52,526 INFO: Project startup [in C:\Users\44738\OneDrive\Documents\Web\app\__init__.py:66]
+2020-12-22 23:43:56,135 INFO: Project startup [in C:\Users\44738\OneDrive\Documents\Web\app\__init__.py:66]
+2020-12-22 23:43:59,442 INFO: Project startup [in C:\Users\44738\OneDrive\Documents\Web\app\__init__.py:66]
+2020-12-22 23:44:37,493 INFO: Project startup [in C:\Users\44738\OneDrive\Documents\Web\app\__init__.py:66]
+2020-12-22 23:44:43,035 INFO: Project startup [in C:\Users\44738\OneDrive\Documents\Web\app\__init__.py:66]
+2020-12-22 23:44:47,209 INFO: Project startup [in C:\Users\44738\OneDrive\Documents\Web\app\__init__.py:66]
+2020-12-22 23:45:05,554 INFO: Project startup [in C:\Users\44738\OneDrive\Documents\Web\app\__init__.py:66]
+2020-12-22 23:45:10,461 INFO: Project startup [in C:\Users\44738\OneDrive\Documents\Web\app\__init__.py:66]
+2020-12-22 23:45:22,007 INFO: Project startup [in C:\Users\44738\OneDrive\Documents\Web\app\__init__.py:66]
+2020-12-22 23:45:34,519 ERROR: Exception on /auth/login [POST] [in C:\Users\44738\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.7_qbz5n2kfra8p0\LocalCache\local-packages\Python37\site-packages\flask\app.py:1891]
+Traceback (most recent call last):
+  File "C:\Users\44738\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.7_qbz5n2kfra8p0\LocalCache\local-packages\Python37\site-packages\flask\app.py", line 2446, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\44738\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.7_qbz5n2kfra8p0\LocalCache\local-packages\Python37\site-packages\flask\app.py", line 1951, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\44738\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.7_qbz5n2kfra8p0\LocalCache\local-packages\Python37\site-packages\flask_cors\extension.py", line 165, in wrapped_function
+    return cors_after_request(app.make_response(f(*args, **kwargs)))
+  File "C:\Users\44738\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.7_qbz5n2kfra8p0\LocalCache\local-packages\Python37\site-packages\flask\app.py", line 1820, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "C:\Users\44738\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.7_qbz5n2kfra8p0\LocalCache\local-packages\Python37\site-packages\flask\_compat.py", line 39, in reraise
+    raise value
+  File "C:\Users\44738\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.7_qbz5n2kfra8p0\LocalCache\local-packages\Python37\site-packages\flask\app.py", line 1949, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\44738\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.7_qbz5n2kfra8p0\LocalCache\local-packages\Python37\site-packages\flask\app.py", line 1935, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "C:\Users\44738\OneDrive\Documents\Web\app\auth\routes.py", line 20, in login
+    user = User.query.filter_by(username=form.username.data).first()
+NameError: name 'User' is not defined

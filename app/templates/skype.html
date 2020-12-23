@@ -1,0 +1,80 @@
+{% extends "base.html" %}
+
+{% block app_content %}
+
+
+
+<div>
+
+  <div style="float: left">
+  <h1> Skype Contacts </h1>
+<table style="float: left">
+
+    <tr>
+      <th> ID </th>
+      <th> Name </th>
+    </tr>
+      {% for contact in contacts %}
+    <tr>
+
+      <td>
+        <div class="checkbox">
+          <form style="font-size:15px" align="center" action="" method="post" novalidate>
+          <label><input type="checkbox" name="check" value={{  contact.contact_skype_id }}> {{ contact.contact_skype_id}} </label>
+        </div>
+      </td>
+      <td><a href="{{url_for('main.messages', user_id = contact.contact_skype_id )}}">  {{contact.contact_name}} </td>
+    </tr>
+      {% endfor %}
+      </table>
+
+      <br> 
+<form style="float: down">
+
+         {{ form.hidden_tag() }}
+         <p>
+             {{ form.text }}
+
+
+         </p>
+
+         <p> {{ form.submit() }} </p>
+         <p> {{ check_messages.submit() }} </p>
+         </form>
+
+
+
+
+    </div>
+
+      <div style="float: right">
+        <h1> Skype Groups  </h1>
+        <table style="float: right">
+      <tr>
+        <th> Group  </th>
+        <th> Name </th>
+      </tr>
+        {% for group in groups %}
+      <tr>
+  
+        <td>
+          <div class="checkbox">
+            <form style="font-size:15px" align="center" action="" method="post" novalidate>
+            <label><input type="checkbox" name="check" value={{  group.group_name }}> {{ group.group_name }} </label>
+          </div>
+        </td>
+        <td>
+            {% for g in group.contacts %}
+          <a href="{{url_for('main.messages', user_id = g.contact_skype_id )}}">  {{g.contact_name}}>
+            {% endfor %}  
+          </td>
+      </tr>
+        {% endfor %}
+        </table>
+        </div>
+
+
+</div>
+
+
+{% endblock %}

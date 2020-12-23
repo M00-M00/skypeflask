@@ -1,0 +1,15 @@
+<table>
+    <tr valign="top">
+
+        <td>
+
+              {% if SkypeMessage.skype_account == SkypeMessage.skype_sender_name %}
+              <a>  YOU: </a><
+              {% else %}
+              <a>{{ SkypeMessage.skype_sender_name }} :</a>
+              {% endif %}
+              <a> {{SkypeMessage.timestamp}} </a>
+              <a><br> {{ SkypeMessage.body }}</a>
+        </td>
+    </tr>
+</table>

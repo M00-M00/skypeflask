@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+
+{% block app_content %}
+    <head> Hi, {{ current_user.username }} ! </head>
+
+
+
+    <table border="2" align="center" bordercolor="red">
+      <tr>
+        <th> Name </th>
+        <td> {{db_ticker.name}} </td>
+
+        <th> Ticker </th>
+        <<td>{{ db_ticker.ticker}} </td>
+      </tr>
+      <tr>
+        <<th> Sector </th>
+        <td> {{ db_ticker.sector}} </td>
+
+        <th> Website</th>
+        <td> {{ db_ticker.website}} </td>
+      </tr>
+      <tr>
+        <th> Summary</th>
+        <td colspan="3"> {{ db_ticker.summary}}</td>
+      </tr>
+</table>
+
+
+
+
+{% if not current_user.is_following(db_ticker) %}
+<p><a href="{{ url_for('main.follow', ticker=ticker) }}">Follow</a></p>
+{% else %}
+<p><a href="{{ url_for('main.unfollow', ticker=ticker) }}">Unfollow</a></p>
+{% endif %}
+
+
+{% endblock %}

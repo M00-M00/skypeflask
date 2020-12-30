@@ -19,7 +19,7 @@ class SkypeClass():
 
 
     def _connect(self):
-        Skype("edimchenko@gmail.com", "C@ctus2747", ".skype_token")
+        Skype(current_app.config['SKYPE_EMAIL'], current_app.config['SKYPE_PASSWORD'], ".skype_token")
         self._assign_token()
 
 

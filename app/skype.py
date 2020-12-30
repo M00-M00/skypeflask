@@ -17,6 +17,7 @@ class SkypeClass():
             self._connect()
 
 
+
     def _connect(self):
         Skype("edimchenko@gmail.com", "C@ctus2747", ".skype_token")
         self._assign_token()
@@ -52,6 +53,8 @@ class SkypeClass():
             self._connect()
 
 
+
+
     def show_contacts(self):
         #sk = Skype(current_app.config['SKYPE_EMAIL'], current_app.config['SKYPE_PASSWORD'])
         contacts = self.useToken.contacts
@@ -61,7 +64,7 @@ class SkypeClass():
         contacts = self.useToken.contacts
         contact_dict = {}
         for c in contacts:
-            contact_dict[c.id] = {"id":c.id, "name": c.name.first + " " + c.name.last}
+            contact_dict[c.id] = {"id":c.id, "name": str(c.name.first) + " " + str(c.name.last)}
         return contact_dict
 
     def send_message_individually(self, recepients, message):
@@ -77,9 +80,7 @@ class SkypeClass():
                 db_message = message(chat_id = nm.chatId, skype_sender_name = nm.userId, skype_message_id = nm.id, timestamp = nm.time, body = nm.content, skype_account = self.useToken.userId)
                 db.session.add(db_message)
                 db.session.commit()
-
-
-
+    
     def receive_message(self, recepients):
         self._check_expiration()
         for recepient in recepients:
@@ -90,5 +91,24 @@ class SkypeClass():
                     db_message = message(chat_id = nm.chatId, skype_sender_name = nm.userId, skype_message_id = nm.id, timestamp = nm.time, body = nm.content, skype_account = self.useToken.userId)
                     db.session.add(db_message)
                     db.session.commit()
+
+
+
+"""
+    def check_messages(self):
+        self._check_expiration()
+        
+        if len(new_msgs) > 0:
+            for nm in new_msgs:
+                db_message = message.query.filter_by(skype_message_id= nm.id).first()
+                if db_message is None:
+                    db_message = message(chat_id = nm.chatId, skype_sender_name = nm.userId, skype_message_id = nm.id, timestamp = nm.time, body = nm.content, skype_account = self.useToken.userId)
+                    db.session.add(db_message)
+                    db.session.commit()
+        else:
+            flash("No new messages!")
+"""
+
+
 
 

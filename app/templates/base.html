@@ -32,6 +32,10 @@
                       <li><a href="{{ url_for('auth.login') }}">Login</a></li>
                       {% else %}
                       <li>  <a href="{{ url_for('main.skype')}}"> Skype </a></li>
+                      {% set new_messages = current_user.new_messages() %}
+                      {% if new_messages %}
+                      <span class="badge">{{ new_messages }}</span>
+                      {% endif %}
                       <li><a href="{{ url_for('auth.logout') }}">Logout</a></li>
                       {% endif %}
                   </ul>
@@ -103,5 +107,35 @@ $(function () {
         }
     );
 });
+
+
+function set_message_count(n, id) {
+            $('#' + id ).text(n);
+            $('#' + id ).css('visibility', n ? 'visible' : 'hidden');
+        }
+
+        {% if current_user.is_authenticated %}
+
+        $(function() {
+            var since = 0;
+            setInterval(function() {
+                $.ajax('{{ url_for('main.notifications') }}').done(
+                    function(notifications) {
+                        for (var i = 0; i < notifications.length; i++) {
+                            
+                                set_message_count(  notifications[i].count  ,  notifications[i].id );
+                            
+                        };
+                    
+                                
+
+                    }
+                );
+
+            }, 10000);
+        });
+        {% endif %}
+
+
 </script>
 {% endblock %}

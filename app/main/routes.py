@@ -1,7 +1,7 @@
 from flask import render_template, flash, redirect, url_for, current_app, request
 import requests
 from flask_login import current_user, login_required
-from app.main.forms import SendSkypeMessageForm, CheckSkypeMessageForm
+from app.main.forms import SendSkypeMessageForm, CheckSkypeMessageForm, ChatReplyForm
 from app.models import user, contact, message, group
 from app import db
 from app.main import bp
@@ -19,7 +19,7 @@ from flask import jsonify
 def before_request():
     if current_user.is_authenticated:
         current_user.last_seen = datetime.utcnow()
-        #db.session.commit()
+        db.session.commit()
 
 
 
@@ -28,7 +28,7 @@ def before_request():
 @login_required
 def index():
 
-    return render_template('index.html', title='Home')
+    return render_template('index.html', title='Home', contact_db = contact)
 
 
 @bp.route('/fetch_contacts', methods=['GET', 'POST'])
@@ -84,31 +84,38 @@ def skype():
     skypeSession = SkypeClass()
     print(current_app.config['SKYPE_EMAIL'], current_app.config['SKYPE_PASSWORD'])
     contacts = contact.query.filter_by(user_id = current_user.id).all()
+    contacts = [contact for contact in contacts if contact.contact_skype_id != "echo123"]
     groups = group.query.filter_by(user_id = current_user.id).all()
     selected = request.form.getlist('check')
     message = form.text.data
     if form.validate_on_submit():
         #skypeSession.send_message_individually(selected, message)
         flash(str(selected) + "were sent a message" + message)
-    #if check_messages.submit():
-        #skypeSession.receive_message(selected)
+    if check_messages.submit():
+            skypeSession.receive_message(selected)
 
     return render_template('skype.html', title='Skype Messaging',  contacts = contacts, groups = groups,  form = form, check_messages = check_messages )
 
 @bp.route("/messages/<string:user_id>", methods=["GET", "POST"])
 @login_required
 def messages(user_id):
+    form = ChatReplyForm()
     skypeSession = SkypeClass()
     skypeSession.receive_message([user_id])
     chat_id = f"8:{user_id}"
     page = request.args.get("page", 1, type=int)
     messages = message.query.filter_by(chat_id = chat_id)
     messages_ordered = messages.order_by(message.timestamp.desc())
+    message.mark_as_read(user_id)
+    new_message = form.text.data
+    if form.validate_on_submit():
+        skypeSession.send_message_individually(user_id, new_message)
+        flash(str(user_id) + "were sent a message" + new_message)
     #next_url = url_for('main.messages/<string:chat_id', page=messages.next_num) \
     #    if messages.has_next else None
     #prev_url = url_for('main.messages/<string:chat_id', page=messages.prev_num) \
     #    if messages.has_prev else None
-    return render_template('messages.html', messages=messages_ordered)
+    return render_template('messages.html', messages=messages_ordered, form = form)
                       # next_url=next_url, prev_url=prev_url)
 
 @bp.route("/contacts")
@@ -132,4 +139,16 @@ def get_current_time():
     return jsonify(dd)
 
 
+@bp.route('/notifications')
+@login_required
+def notifications():
+    contacts = contact.query.filter_by(user_id = current_user.id).all()
+    ids = [contact.contact_skype_id for contact in contacts if contact.contact_skype_id != "echo123"]
+    skypeSession = SkypeClass()
+    skypeSession.receive_message(ids)
+    notifications = contact.all_unread_count()
+    return jsonify([{
+        'id': n.replace(".","_"),
+        'count': contact._unread_count(n),
+    } for n in notifications])
 

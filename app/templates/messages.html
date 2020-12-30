@@ -7,4 +7,18 @@
         {% include '_message.html' %}
     {% endfor %}
   
+    <br> 
+    <form style="float: down">
+    
+             {{ form.hidden_tag() }}
+             <p>
+                 {{ form.text }}
+    
+    
+             </p>
+    
+             <p> {{ form.submit() }} </p>
+             </form>
+
+
 {% endblock %}

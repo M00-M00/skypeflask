@@ -11,5 +11,10 @@ class SendSkypeMessageForm(FlaskForm):
     message_as_a_group = BooleanField("Group in one chat")
     submit = SubmitField("Send Message")
 
+
+class ChatReplyForm(FlaskForm):
+    text = TextAreaField("text", validators = [DataRequired()])
+    submit = SubmitField("Send Message")
+
 class CheckSkypeMessageForm(FlaskForm):
     submit = SubmitField("Check Messages")

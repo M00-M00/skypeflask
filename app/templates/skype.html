@@ -16,15 +16,24 @@
     </tr>
       {% for contact in contacts %}
     <tr>
-
       <td>
         <div class="checkbox">
           <form style="font-size:15px" align="center" action="" method="post" novalidate>
           <label><input type="checkbox" name="check" value={{  contact.contact_skype_id }}> {{ contact.contact_skype_id}} </label>
         </div>
       </td>
-      <td><a href="{{url_for('main.messages', user_id = contact.contact_skype_id )}}">  {{contact.contact_name}} </td>
+      <td><a href="{{url_for('main.messages', user_id = contact.contact_skype_id )}}">  {{contact.contact_name}} 
+        {% set unread_messages = contact.unread_count() %}
+        <span id='{{contact.contact_skype_id.replace(".","_")}}' class="badge"
+              style="visibility: {% if unread_messages > 0 %} visible
+                                 {% else %} hidden {% endif %};">
+            {{ unread_messages }}
+          </td>
+
+
     </tr>
+
+
       {% endfor %}
       </table>
 

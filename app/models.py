@@ -30,6 +30,8 @@ class user(UserMixin, db.Model):
     contacts = db.relationship("contact", backref='user', lazy='dynamic')
     messages = db.relationship("message", backref='user', lazy ='dynamic')
     groups = db.relationship("group", backref="user", lazy = "dynamic")
+    last_read_time = db.Column(db.DateTime)
+
 
     def __repr__(self):
         return '<User {}>'.format(self.username)
@@ -45,6 +47,11 @@ class user(UserMixin, db.Model):
             {'reset_password': self.id, 'exp': time() + expires_in},
             app.config['SECRET_KEY'], algorithm='HS256').decode('utf-8')
 
+    def new_messages(self):
+        last_read_time = self.last_read_time or datetime(1900, 1, 1)
+        return message.query.filter_by(user_id = self.id).filter(
+            message.timestamp > last_read_time).count()
+
 
 class contact(db.Model):
     id = db.Column(db.Integer, primary_key = True)
@@ -53,6 +60,33 @@ class contact(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
     groups = db.relationship("group", secondary= association_table, lazy = 'dynamic',
     back_populates = "contacts")
+
+    def unread_count(self):
+        msgs = message.query.filter_by(chat_id = f"8:{self.contact_skype_id}", read = False).all()
+        if msgs != None:
+            count = 0
+        else:
+            count = len(msgs)
+        print(count)
+        return count
+
+
+    @staticmethod
+    def _unread_count(contact_skype_id):
+        msgs = message.query.filter_by(chat_id = "8:" + contact_skype_id, read = False).all()
+        if msgs == None:
+            count = 0
+        else:
+            count = len(msgs)
+        return count
+        
+    @staticmethod
+    def all_unread_count():
+        msgs = message.query.filter_by(read = False).all()
+        ids = [m.skype_sender_name for m in msgs if m.skype_sender_name != current_app.config["SKYPE_USERID"]]
+        ids = list(set(ids))
+        
+        return ids
 
 
 
@@ -74,7 +108,28 @@ class message(db.Model):
     skype_account = db.Column(db.String(128))
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
     body = db.Column (db.String())
+    read = db.Column (db.Boolean, default = False)
     timestamp = db.Column(db.DateTime, index = True, default = datetime.utcnow)
 
     def __repr__(self):
         return "<Message {}>".format(self.body)
+
+    def mark_read(self):
+        self.read = True
+        db.session.commit()
+
+
+    @staticmethod
+    def contains_unread(skype_account):
+        msgs = self.query.filter_by(skype_sender_name = skype_account, read = False).first()
+        if msgs != None:
+            return True
+        else:
+            return False
+    
+    @staticmethod
+    def mark_as_read(skype_acc):
+        #msgs = message.query.filter_by(skype_sender_name = skype_account, read = False).all()
+        #msgs.update(read = True)
+        db.session.query(message).filter_by(skype_sender_name = skype_acc).update({'read': True})
+        db.session.commit()

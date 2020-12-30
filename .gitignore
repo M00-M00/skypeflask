@@ -179,3 +179,6 @@ yarn-error.log*
 
 /react-flask-app/node_modules/
 
+config.py
+
+/logs/
